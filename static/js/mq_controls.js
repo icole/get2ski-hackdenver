@@ -141,6 +141,7 @@
 						{name:'Vail','lat': 39.6391, 'lng': -106.3738}];
 		var resortLat = 0, resortLon = 0; 
 		var resort = {};
+		var resortName = "";
 		fcdata.locations.map(function(fcPlace) {
 			if (fcPlace.state.code === 'CO') {
 				resortName = fcPlace.city + ', ' + fcPlace.state.name;
@@ -175,7 +176,7 @@
 		
 		resortLat = resort.lat;
 		resortLon = resort.lng;
-		console.log('resortName(',resort.name,'): ', resortName,' at ',resortLat,',',resortLon);
+		//console.log('resortName(',resort.name,'): ', resortName,' at ',resortLat,',',resortLon);
 						
 		//http://www.mapquestapi.com/geocoding/v1/address?key=Fmjtd%7Cluua25utl1%2Crg%3Do5-962slw&callback=renderOptions&inFormat=kvp&outFormat=json&location=Breckenridge,%20CO
 		var resortPoi=new MQA.Poi({lat:resortLat, lng:resortLon});
@@ -211,7 +212,7 @@
 		var fcApiKey = "4c15158dd13e774d";
 		var resortName = "";
 		//document.title = "Vail Map";
-		console.log(document.title.split(" ")[0]);
+		console.log("doc title: " + document.title.split(" ")[0]);
 		var titleStrings = document.title.split(" ");
 		resortName = titleStrings[0];
 		
