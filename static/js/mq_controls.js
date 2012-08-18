@@ -120,11 +120,6 @@
 	}
 	
 	function eventRaised(evt){
-		
-    	var e=document.createElement('div');
-    	e.innerHTML=evt.eventName;
-    	var eDiv=document.getElementById('showEvents');
-    	eDiv.insertBefore(e, eDiv.firstChild)
 		console.log('mapquest event raised: ',evt);
 //     	var e=document.createElement('div');
 //     	e.innerHTML=evt.eventName;
@@ -134,7 +129,6 @@
 	
 	function loadResorts() {
 		// mq key Fmjtd%7Cluua25utl1%2Crg%3Do5-962slw
-		var resorts = ['Breckenridge','Keystone','Winter Park','Vail'];
 		var resorts = [{name:'Breckenridge',"lng":-106.037804,"lat":39.481701},
 						{name:'Keystone','lat':39.605,'lng': -105.954167},
 						{name:'Winter Park','lat': 39.886944,'lng': -105.7625},
@@ -142,44 +136,75 @@
 		//['Breckenridge','Keystone','Winter Park','Vail'];
 		var fullContactAPI = "https://api.fullcontact.com/v2/address/locationEnrichment.json";
 		var fcApiKey = "4c15158dd13e774d";
+		var resortName = "";
+		var resortLat = 0, resortLon = 0;
 		resorts.map(function(resort) {
 			// hit FC 
 			var fcUrl = fullContactAPI;
 			$.ajax({url: fcUrl, 
 					cache: false, 
+					async: false,
 					dataType: 'jsonp', 
 					data: { 
 						apiKey: fcApiKey, 
-						place: resort 
+						place: resort.name
 					}, 	
 					error: function(jqXHR, textStatus, errorThrown){
 						console.warn("There was an error on the FullContact call, status is:" + textStatus);
 					},
 					success: function(fcdata, textStatus, errorThrown) {
-						console.log('fc returns ', fcdata);
+						//console.log('fc returns ', fcdata);
+						fcdata.locations.map(function(fcPlace) {
+							if (fcPlace.state.code === 'CO') {
+								resortName = fcPlace.city + ', ' + fcPlace.state.name;
+								console.log('resort name: ', resortName);
+							}
+						});
+						
+						resortLat = resort.lat;
+						resortLon = resort.lng;
+						console.log('resortName(',resort.name,'): ', resortName,' at ',resortLat,',',resortLon);
+						
+						//http://www.mapquestapi.com/geocoding/v1/address?key=Fmjtd%7Cluua25utl1%2Crg%3Do5-962slw&callback=renderOptions&inFormat=kvp&outFormat=json&location=Breckenridge,%20CO
+						var resortPoi=new MQA.Poi({lat:resortLat, lng:resortLon});
+						//-106.037804,"lat":39.481701
+						var resortIcon=new MQA.Icon("../img/sport_skiing_downhill.p.24.png",24,24);
+				
+						/*Sets the rollover content of the POI.*/ 
+						resortName = (resortName === "" ? resort.name : resortName);
+						resortPoi.setRolloverContent('<strong>' + resortName + '</strong>');
+				
+						/*Sets the InfoWindow contents for the POI. By default, when the POI receives a mouseclick 
+						event, the InfoWindow will be displayed with the HTML passed in to MQA.POI.setInfoContentHTML method.*/ 
+						//resortPoi.setInfoContentHTML('Camera type: Still. Images Courtesy of ITS <img style="width:300px; height:200px;" src="http://cotrip.org/images/ws/camera?imageURL=77"/>');
+						resortPoi.setIcon(resortIcon);
+						resortPoi.maxInfoWindowWidth = 420;
+				
+						/*This will add the POI to the map in the map's default shape collection.*/ 
+						map.addShape(resortPoi);
+						
+						MQA.EventManager.addListener(map, 'infowindowopen', eventRaised);
+						
+						MQA.withModule('directions', function() {
+							map.addRoute([
+							  {latLng: {lat: 39.739167, lng: -104.984722}},
+							  {latLng: {lat: resortLat, lng: resortLon}}
+							]);
+						});
+						
+						// 
+// 						
+// 						navigator.geolocation.getCurrentPosition(function(position) {
+// 							map.setCenter({lat: position.coords.latitude, lng: position.coords.longitude});
+// 						
+	
+						/*Uses the MQA.TileMap.addRoute function (added to the TileMap with the directions module) 
+						passing in an array of location objects as the only parameter.*/ 
+												
 					}
 			});
 			
-			//http://www.mapquestapi.com/geocoding/v1/address?key=Fmjtd%7Cluua25utl1%2Crg%3Do5-962slw&callback=renderOptions&inFormat=kvp&outFormat=json&location=Breckenridge,%20CO
-			var resortPoi=new MQA.Poi({lat:39.481701, lng:-106.037804});
-			//-106.037804,"lat":39.481701
-  			var resortIcon=new MQA.Icon("../img/sport_skiing_downhill.p.24.png",24,24);
-
-  			/*Sets the rollover content of the POI.*/ 
-			resortPoi.setRolloverContent('<strong>' + resort + '</strong>');
-	
-			/*Sets the InfoWindow contents for the POI. By default, when the POI receives a mouseclick 
-			event, the InfoWindow will be displayed with the HTML passed in to MQA.POI.setInfoContentHTML method.*/ 
-			//resortPoi.setInfoContentHTML('Camera type: Still. Images Courtesy of ITS <img style="width:300px; height:200px;" src="http://cotrip.org/images/ws/camera?imageURL=77"/>');
-			resortPoi.setIcon(resortIcon);
-			resortPoi.maxInfoWindowWidth = 420;
-	
-			/*This will add the POI to the map in the map's default shape collection.*/ 
-			map.addShape(resortPoi);
 		});
-		
-		MQA.EventManager.addListener(map, 'infowindowopen', eventRaised);
-
 				
 	}
     
