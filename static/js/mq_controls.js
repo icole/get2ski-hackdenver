@@ -63,14 +63,35 @@
 		var stationPoi = new MQA.Poi({lat:lat, lng:lon});
 		var stationIcon = new MQA.Icon("http://cotrip.org/theme/cotrip.org/images/devices/icon_device_weather_station_with_cam_16x23.gif",16,23);
 		stationPoi.setRolloverContent(station.properties.id);
-		var stationContent = "Weather Cam";
-		// if (stationPoi.properties.NorthImage != null) {
-// 			console.log('adding station image');
-// 			stationConent += "NorthImage: ";
-// 			stationContent += "<img src='";
-// 			stationContent += stationPoi.properties.NorthImage;
-// 			stationContent += "' style='width:200px; height:200px;' />";
-// 		}
+		var stationContent = "Weather Cam ";
+		if (station.properties.NorthImage !== 'undefined') {
+			console.log('adding station image');
+			stationContent += "NorthImage: ";
+			stationContent += "<img src='";
+			stationContent += station.properties.NorthImage;
+			stationContent += "' style='width:200px; height:200px;' />";
+		}
+		if (station.properties.EastImage !== 'undefined') {
+			console.log('adding station image');
+			stationContent += "WestImage: ";
+			stationContent += "<img src='";
+			stationContent += station.properties.NorthImage;
+			stationContent += "' style='width:200px; height:200px;' />";
+		}
+		if (station.properties.SouthImage !== 'undefined') {
+			console.log('adding station image');
+			stationContent += "SouthImage: ";
+			stationContent += "<img src='";
+			stationContent += station.properties.NorthImage;
+			stationContent += "' style='width:200px; height:200px;' />";
+		}
+		if (station.properties.WestImage !== 'undefined') {
+			console.log('adding station image');
+			stationContent += "WestImage: ";
+			stationContent += "<img src='";
+			stationContent += station.properties.NorthImage;
+			stationContent += "' style='width:200px; height:200px;' />";
+		}
 		stationPoi.setInfoContentHTML(stationContent);
 		stationPoi.setIcon(stationIcon);
 		map.addShape(stationPoi);
