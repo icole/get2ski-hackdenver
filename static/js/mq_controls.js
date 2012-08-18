@@ -157,7 +157,7 @@
         			 resort.lat = 39.605;
         			 resort.lng = -105.954167;
         			break;
-        			case /Winter/.test(resortName):
+        			case /winterpark/.test(resortName):
         			 resort.name = resortName;
         			 resort.lat = 39.886944;
         			 resort.lng = -105.7625;
