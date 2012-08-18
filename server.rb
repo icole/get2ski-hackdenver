@@ -1,5 +1,7 @@
 require 'sinatra'
 
+set :public_folder, '/static'
+
 get '/' do
   "Hi!"
 end

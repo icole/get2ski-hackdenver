@@ -107,7 +107,7 @@
 // 				success: success
 // 		});
 		console.log('show weather stations');
-		$.getJSON('js/weather.json', function(data) {
+		$.getJSON('js/stations.json', function(data) {
 			console.log(" data.length: " + data.length);
 			var numStations = data.length;
 			for (var i=0; i < data.length; i++) {
