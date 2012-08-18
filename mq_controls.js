@@ -4,18 +4,36 @@
 
     function loadMap() {
 	
+	
+		
       /*Create an object for options*/ 
       var options={
-        elt:document.getElementById('map'),       /*ID of element on the page where you want the map added*/ 
+        elt:document.getElementById('map_canvas'),       /*ID of element on the page where you want the map added*/ 
         zoom:13,                                  /*initial zoom level of the map*/ 
         latLng:{lat:40.320969, lng:-104.980774},   /*center of map in latitude/longitude */ 
         mtype:'osm',                              /*map type (osm)*/ 
         bestFitMargin:0,                          /*margin offset from the map viewport when applying a bestfit on shapes*/ 
         zoomOnDoubleClick:true                    /*zoom in when double-clicking on map*/ 
       };
-
-      /*Construct an instance of MQA.TileMap with the options object*/ 
+      
+	  /*Construct an instance of MQA.TileMap with the options object*/ 
       window.map = new MQA.TileMap(options);
+      
+      MQA.withModule('largezoom', function() {
+      map.addControl(
+       new MQA.LargeZoom(),
+       new MQA.MapCornerPlacement(MQA.MapCorner.TOP_LEFT, new MQA.Size(5,5))
+      );
+      });
+      
+      MQA.withModule('geolocationcontrol', function() {
+        
+        map.addControl(
+          new MQA.GeolocationControl()
+        );
+    
+      });
+
       console.log('map loaded');
     }
     
@@ -38,8 +56,22 @@
   	map.addShape(berthoud_cam);
     }
     
+    function findDeviceWidthAndHeight() {
+    	var h = $(window).height();
+		var rh = h+10;
+		console.log('h: ', h, ' rh: ', rh);
+		var w = $(window).width();
+		$("#map_canvas").css('width',w+'px');
+		console.log(' width: ',w);
+		$("#map_canvas").css('height',rh+'px');
+		//document.getElementById("map_canvas").style.width=window.innerWidth;
+		//document.getElementById("map_canvas").style.height=window.innerHeight;
+
+	}
+    
     $(document).bind('pageinit', function(event) {
     	console.log('page loaded');
+    	findDeviceWidthAndHeight();
     	loadMap();
     	loadWebcams();
     });
