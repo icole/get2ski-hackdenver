@@ -18,23 +18,38 @@
 	<div data-role="header" data-theme="b" data-position="inline" class="classheader">
 		<h1>Get2Ski</h1>
 		<a href="#home" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-left jqm-home">Options</a>
-        <h1>Location</h1>
+		<a href="#details" rel="external" id="loadWeather" data-role="button" data-inline="true" data-theme="b">Weather Stations</a>
 	</div><!-- /header -->
 
 	<div data-role="content">	
-	 <div id="map_canvas"></div>
-	
 		<p>Welcome to Get2Ski. Less delays, more fresh pow-pow.</p>	
 		<div class="ui-grid-a">
 			<div class="ui-block-a"><a href="" rel="external" id="loadWeather" data-role="button" data-inline="true" data-theme="b">Weather Stations</a></div>
 			<div class="ui-block-b"><strong>Traffic</strong> details and alerts</div>
 		</div><!-- /grid-a -->	
+	 <div id="map_canvas"></div>
+	 <ul data-role="listview">
+	 	<li><a href="#page2">Details</a></li>
+	 </ul>
+		
 	</div><!-- /content -->
 	 <div data-role="footer" data-position="fixed" data-theme="b" class="classFooter">
         <h1>Copyright © 2011.</h1> 
     </div>
 
   </div><!-- /page -->
+  
+  <div data-role="page" id="page2">
+  	<div data-role="header">
+  		<h1>Details</h1>
+  	</div>
+  	<div data-role="content">
+  		Alerts, Traffic delays and more
+  	</div>
+  	<div data-role="footer">
+  		<h4>Details footer</h4>
+  	</div>
+  </div>
   
   <script src="js/mq_controls.js" type="text/javascript"></script>
   
