@@ -13,30 +13,26 @@
  <body>
 
 
-  <div data-role="page" id="atm" data-theme="d">
+  <div data-role="page" id="main" data-theme="b">
 
-    <div data-role="header" data-theme="b" data-position="inline" class="classheader">
-        <h1>Get2Ski</h1>
-        <a href="#home" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-left jqm-home">Options</a>
-        <h1>Detail Map</h1>
-    </div><!-- /header -->
+  <div data-role="header" data-theme="b" data-position="inline" class="classheader">
+    <h1>Get2Ski</h1>
+    <a href="index.html" data-icon="back" data-iconpos="notext" data-add-back-btn="true" class="ui-btn-left jqm-home">Back</a>
+    <a href="#stations" rel="external" id="loadWeather" data-role="button" data-inline="true" data-theme="b">Weather Stations</a>
+  </div><!-- /header -->
 
-    <div data-role="content">   
-     <div id="map_canvas"></div>
+  <div data-role="content"> 
+    <p>Get2Ski. Less delays, more fresh pow-pow.</p>  
+   <div id="map_canvas"></div>
     
-        <p>Welcome to Get2Ski. Less delays, more fresh pow-pow.</p> 
-        <div class="ui-grid-a">
-            <div class="ui-block-a"><a href="" rel="external" id="loadWeather" data-role="button" data-inline="true" data-theme="b">Weather Stations</a></div>
-
-        </div><!-- /grid-a -->  
-    </div><!-- /content -->
-     <div data-role="footer" data-position="fixed" data-theme="b" class="classFooter">
-        <h1>Copyright © 2011.</h1> 
+  </div><!-- /content -->
+   <div data-role="footer" data-position="fixed" data-theme="b" class="classFooter">
+        <h1>Built at HackDenver 2012, courtesy of MapQuest and FullContact.</h1> 
     </div>
 
   </div><!-- /page -->
   
-  <script src="./js/mq_controls.js" type="text/javascript"></script>
+  <script src="js/mq_controls.js" type="text/javascript"></script>
   
  </body>
 </html>

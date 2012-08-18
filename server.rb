@@ -7,23 +7,23 @@ get '/' do
   erb :index
 end
 
-post '/vail' do
-  set :destination, ""
+get '/vail' do
+  set :destination, "vail"
   erb :mapquest
 end
 
-post '/breck' do
-  set :destination, ""
+get '/breck' do
+  set :destination, "breck"
   erb :mapquest
 end
 
-post '/keystone' do
-  set :destination, ""
+get '/keystone' do
+  set :destination, "keystone"
   erb :mapquest
 end
 
-post '/winterpark' do
-  set :destination, ""
+get '/winterpark' do
+  set :destination, "winterpark"
   erb :mapquest
 end
 

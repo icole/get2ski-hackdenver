@@ -62,8 +62,8 @@
 		var lon = station.geometry.coordinates[0];
 		var stationPoi = new MQA.Poi({lat:lat, lng:lon});
 		var stationIcon = new MQA.Icon("http://cotrip.org/theme/cotrip.org/images/devices/icon_device_weather_station_with_cam_16x23.gif",16,23);
-		stationPoi.setRolloverContent(station.properties.id);
-		var stationContent = "<div style='overflow: scroll;'> Weather Cams ";
+		stationPoi.setRolloverContent(station.id);
+		var stationContent = "<div style='overflow: scroll;'>" + station.id;
 		if (station.properties.NorthImage != null) {
 			console.log('adding station image');
 			stationContent += "NorthImage: ";
@@ -73,23 +73,23 @@
 		}
 		if (station.properties.EastImage != null) {
 			console.log('adding station image');
-			stationContent += "WestImage: ";
+			stationContent += "EastImage: ";
 			stationContent += "<img src='";
-			stationContent += station.properties.NorthImage;
+			stationContent += station.properties.EastImage;
 			stationContent += "' style='width:200px; height:200px;' />";
 		}
 		if (station.properties.SouthImage != null) {
 			console.log('adding station image');
 			stationContent += "SouthImage: ";
 			stationContent += "<img src='";
-			stationContent += station.properties.NorthImage;
+			stationContent += station.properties.SouthImage;
 			stationContent += "' style='width:200px; height:200px;' />";
 		}
 		if (station.properties.WestImage != null) {
 			console.log('adding station image');
 			stationContent += "WestImage: ";
 			stationContent += "<img src='";
-			stationContent += station.properties.NorthImage;
+			stationContent += station.properties.WestImage;
 			stationContent += "' style='width:200px; height:200px;' />";
 		}
 		stationContent += "</div>";
