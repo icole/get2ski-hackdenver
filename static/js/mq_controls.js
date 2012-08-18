@@ -62,8 +62,15 @@
 		var lon = station.geometry.coordinates[0];
 		var stationPoi = new MQA.Poi({lat:lat, lng:lon});
 		var stationIcon = new MQA.Icon("http://cotrip.org/theme/cotrip.org/images/devices/icon_device_weather_station_with_cam_16x23.gif",16,23);
-		stationPoi.setRolloverContent(station.id);
-		var stationContent = "<div style='overflow: scroll;'>" + station.id;
+		stationPoi.setRolloverContent(station.id + "<br/>Current Temp: " + station.properties.CurrentTemp + "<br/>");
+		var stationContent = "<div style='overflow: scroll;'>" + station.id + "<br/><br/>";
+        stationContent += "Current Temp: " + station.properties.CurrentTemp + "<br/>";
+        stationContent += "Max Temp: " + station.properties.MaxTemp + "<br/>";
+        stationContent += "Min Temp: " + station.properties.MinTemp + "<br/>";
+        stationContent += "Average WS: " + station.properties.AvgWS + "<br/>";
+        stationContent += "Est Precip: " + station.properties.EstPrecip + "<br/>";
+
+
 		if (station.properties.NorthImage != null) {
 			console.log('adding station image');
 			stationContent += "NorthImage: ";

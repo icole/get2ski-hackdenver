@@ -25,11 +25,26 @@ module CDOTParsable
                 image_location = "http://cotrip.org/" + image_location
                 properties[key.to_sym] = image_location
             end
-            station.xpath('ws:WeatherInfo').each do |camera|
-                key = camera.xpath('camera:ViewDescription').text + "Image"
-                image_location = camera.xpath('camera:ImageLocation').text
-                image_location = "http://cotrip.org/" + image_location
-                properties[key.to_sym] = image_location
+            station.xpath('ws:WeatherInfo').each do |weather_info|
+                key = "CurrentTemp"
+                temp = weather_info.xpath('ws:EssAirTemp').text
+                properties[key.to_sym] = temp
+
+                key = "MaxTemp"
+                max_temp = weather_info.xpath('ws:EssMaxTemp').text
+                properties[key.to_sym] = max_temp
+
+                key = "MinTemp"
+                min_temp = weather_info.xpath('ws:EssMinTemp').text
+                properties[key.to_sym] = min_temp
+
+                key = "AvgWS"
+                avg_ws = weather_info.xpath('ws:EssAvgWindSpeed').text
+                properties[key.to_sym] = avg_ws
+
+                key = "EstPrecip"
+                est_precip = weather_info.xpath('ws:EssPrecip24Hr').text
+                properties[key.to_sym] = est_precip
             end
 
 

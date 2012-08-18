@@ -8,22 +8,22 @@ get '/' do
 end
 
 get '/vail' do
-  set :destination, "vail"
+  set :destination, "Vail"
   erb :mapquest
 end
 
 get '/breckinridge' do
-  set :destination, "breckinridge"
+  set :destination, "Breckinridge"
   erb :mapquest
 end
 
 get '/keystone' do
-  set :destination, "keystone"
+  set :destination, "Keystone"
   erb :mapquest
 end
 
 get '/winterpark' do
-  set :destination, "winterpark"
+  set :destination, "Winterpark"
   erb :mapquest
 end
 
