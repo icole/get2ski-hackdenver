@@ -1,9 +1,11 @@
 require 'sinatra'
 
-set :public_folder, '/static'
+set :public_folder, Proc.new { File.join(root, "static") }
+set :destination, "blhblahblah"
 
 get '/' do
-  "Hi!"
+  erb :locations
+  set :destination, params
 end
 
 get '/stations' do
