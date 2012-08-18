@@ -157,7 +157,7 @@
         			 resort.lat = 39.605;
         			 resort.lng = -105.954167;
         			break;
-        			case /winterpark/.test(resortName):
+        			case /Winter/.test(resortName):
         			 resort.name = resortName;
         			 resort.lat = 39.886944;
         			 resort.lng = -105.7625;
@@ -222,7 +222,7 @@
 					dataType: 'jsonp', 
 					data: { 
 						apiKey: fcApiKey, 
-						place: resortName
+						place: encodeURI(resortName)
 					}, 	
 					error: function(jqXHR, textStatus, errorThrown){
 						console.warn("There was an error on the FullContact call, status is:" + textStatus);
