@@ -180,7 +180,7 @@
 		//http://www.mapquestapi.com/geocoding/v1/address?key=Fmjtd%7Cluua25utl1%2Crg%3Do5-962slw&callback=renderOptions&inFormat=kvp&outFormat=json&location=Breckenridge,%20CO
 		var resortPoi=new MQA.Poi({lat:resortLat, lng:resortLon});
 		//-106.037804,"lat":39.481701
-		var resortIcon=new MQA.Icon("sport_skiing_downhill.p.24.png",24,24);
+		var resortIcon=new MQA.Icon("img/sport_skiing_downhill.p.24.png",24,24);
 
 		/*Sets the rollover content of the POI.*/ 
 		resortName = (resortName === "" ? resort.name : resortName);
