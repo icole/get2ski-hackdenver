@@ -5,10 +5,8 @@ require 'json'
 
 module CDOTParsable
     def generate_weather_stations
-        File.open("stations.json", "a+") do |file|
-                file.puts("[")
-        end
         @doc = Nokogiri::XML(File.open("weatherstation.xml"))
+        station_entries = []
         @doc.xpath('//ws:WeatherStation').each do |station|
             lat = station.xpath('ws:Location/global:Latitude').text
             lon = station.xpath('ws:Location/global:Longitude').text
@@ -24,12 +22,10 @@ module CDOTParsable
             end
             feature = RGeo::GeoJSON::Feature.new(coordinates, station_name, properties)
             geo_entry = RGeo::GeoJSON.encode(feature)
-            File.open("stations.json", "a+") do |file|
-                file.puts(geo_entry.to_json + ",")
-            end
+            station_entries << geo_entry.to_json
         end
         File.open("stations.json", "a+") do |file|
-                file.puts("]")
+            file.puts("[" + station_entries.join(", ") + "]")
         end
     end
 end
