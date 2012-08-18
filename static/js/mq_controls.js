@@ -125,11 +125,21 @@
     	e.innerHTML=evt.eventName;
     	var eDiv=document.getElementById('showEvents');
     	eDiv.insertBefore(e, eDiv.firstChild)
+		console.log('mapquest event raised: ',evt);
+//     	var e=document.createElement('div');
+//     	e.innerHTML=evt.eventName;
+//     	var eDiv=document.getElementById('showEvents');
+//     	eDiv.insertBefore(e, eDiv.firstChild)
   	}
 	
 	function loadResorts() {
 		// mq key Fmjtd%7Cluua25utl1%2Crg%3Do5-962slw
 		var resorts = ['Breckenridge','Keystone','Winter Park','Vail'];
+		var resorts = [{name:'Breckenridge',"lng":-106.037804,"lat":39.481701},
+						{name:'Keystone','lat':39.605,'lng': -105.954167},
+						{name:'Winter Park','lat': 39.886944,'lng': -105.7625},
+						{name:'Vail','lat': 39.6391, 'lng': -106.3738}]; 
+		//['Breckenridge','Keystone','Winter Park','Vail'];
 		var fullContactAPI = "https://api.fullcontact.com/v2/address/locationEnrichment.json";
 		var fcApiKey = "4c15158dd13e774d";
 		resorts.map(function(resort) {
