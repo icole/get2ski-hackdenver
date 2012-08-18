@@ -5,6 +5,7 @@ require 'json'
 
 module CDOTParsable
     def generate_weather_stations
+        File.open('stations.json', 'w') {|file| file.truncate(0) }
         @doc = Nokogiri::XML(File.open("weatherstation.xml"))
         station_entries = []
         @doc.xpath('//ws:WeatherStation').each do |station|
