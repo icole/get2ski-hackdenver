@@ -9,8 +9,8 @@
       /*Create an object for options*/ 
       var options={
         elt:document.getElementById('map_canvas'),       /*ID of element on the page where you want the map added*/ 
-        zoom:13,                                  /*initial zoom level of the map*/ 
-        latLng:{lat:40.320969, lng:-104.980774},   /*center of map in latitude/longitude */ 
+        zoom:10,                                  /*initial zoom level of the map*/ 
+        latLng:{lat:39.7425, lng:-105.513062},   /*center of map in latitude/longitude -105.513062,"lat":39.7425 */ 
         mtype:'osm',                              /*map type (osm)*/ 
         bestFitMargin:0,                          /*margin offset from the map viewport when applying a bestfit on shapes*/ 
         zoomOnDoubleClick:true                    /*zoom in when double-clicking on map*/ 
@@ -107,7 +107,7 @@
 // 				success: success
 // 		});
 		console.log('show weather stations');
-		$.getJSON('js/stations.json', function(data) {
+		$.getJSON('stations.json', function(data) {
 			console.log(" data.length: " + data.length);
 			var numStations = data.length;
 			for (var i=0; i < data.length; i++) {
