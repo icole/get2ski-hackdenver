@@ -12,8 +12,8 @@ get '/vail' do
   erb :mapquest
 end
 
-get '/breck' do
-  set :destination, "breck"
+get '/breckinridge' do
+  set :destination, "breckinridge"
   erb :mapquest
 end
 
