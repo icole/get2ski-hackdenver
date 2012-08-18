@@ -61,9 +61,9 @@
 		var lat = station.geometry.coordinates[1];
 		var lon = station.geometry.coordinates[0];
 		var stationPoi = new MQA.Poi({lat:lat, lng:lon});
-		var stationIcon = "http://cotrip.org/theme/cotrip.org/images/devices/icon_device_weather_station_with_cam_16x23.gif";
+		var stationIcon = new MQA.Icon("http://cotrip.org/theme/cotrip.org/images/devices/icon_device_weather_station_with_cam_16x23.gif",16,23);
 		stationPoi.setRolloverContent(station.properties.id);
-		var stationContent = "";
+		var stationContent = "Weather Cam";
 		// if (stationPoi.properties.NorthImage != null) {
 // 			console.log('adding station image');
 // 			stationConent += "NorthImage: ";
@@ -71,7 +71,9 @@
 // 			stationContent += stationPoi.properties.NorthImage;
 // 			stationContent += "' style='width:200px; height:200px;' />";
 // 		}
-		stationPoi.setInfoContentHtml(stationContent);
+		stationPoi.setInfoContentHTML(stationContent);
+		stationPoi.setIcon(stationIcon);
+		map.addShape(stationPoi);
 		//{"type":"Feature","geometry":{"type":"Point","coordinates":[-104.631233,37.417255]},"properties":{"NorthImage":"http://cotrip.org/images/ws/camera?imageURL=243","SouthImage":"http://cotrip.org/images/ws/camera?imageURL=244","WestImage":"http://cotrip.org/images/ws/camera?imageURL=245"},"id":"025N033 AGUILAR"},
 
 	}
@@ -83,7 +85,7 @@
 // 				success: success
 // 		});
 		console.log('show weather stations');
-		$.getJSON('weather.json', function(data) {
+		$.getJSON('js/weather.json', function(data) {
 			console.log(" data.length: " + data.length);
 			var numStations = data.length;
 			for (var i=0; i < data.length; i++) {

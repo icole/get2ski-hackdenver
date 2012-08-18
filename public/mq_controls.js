@@ -56,6 +56,45 @@
   	map.addShape(berthoud_cam);
     }
     
+    function addStationToMap(station) {
+		console.log(station);
+		var lat = station.geometry.coordinates[1];
+		var lon = station.geometry.coordinates[0];
+		var stationPoi = new MQA.Poi({lat:lat, lng:lon});
+		var stationIcon = "http://cotrip.org/theme/cotrip.org/images/devices/icon_device_weather_station_with_cam_16x23.gif";
+		stationPoi.setRolloverContent(station.properties.id);
+		var stationContent = "";
+		// if (stationPoi.properties.NorthImage != null) {
+// 			console.log('adding station image');
+// 			stationConent += "NorthImage: ";
+// 			stationContent += "<img src='";
+// 			stationContent += stationPoi.properties.NorthImage;
+// 			stationContent += "' style='width:200px; height:200px;' />";
+// 		}
+		stationPoi.setInfoContentHtml(stationContent);
+		//{"type":"Feature","geometry":{"type":"Point","coordinates":[-104.631233,37.417255]},"properties":{"NorthImage":"http://cotrip.org/images/ws/camera?imageURL=243","SouthImage":"http://cotrip.org/images/ws/camera?imageURL=244","WestImage":"http://cotrip.org/images/ws/camera?imageURL=245"},"id":"025N033 AGUILAR"},
+
+	}
+	
+	function loadWeatherStations() {
+		// $.ajax({url: url,
+// 				dataType: 'json',
+// 				data: data,
+// 				success: success
+// 		});
+		console.log('show weather stations');
+		$.getJSON('weather.json', function(data) {
+			console.log(" data.length: " + data.length);
+			var numStations = data.length;
+			for (var i=0; i < data.length; i++) {
+				addStationToMap(data[i]);
+			}
+			//$('.result').html('<p>' + data.foo + '</p>'
+			//+ '<p>' + data.baz[1] + '</p>');
+		});
+
+	}
+    
     function findDeviceWidthAndHeight() {
     	var h = $(window).height();
 		var rh = h+10;
@@ -74,6 +113,8 @@
     	findDeviceWidthAndHeight();
     	loadMap();
     	loadWebcams();
+    	$('#loadWeather').live('click', loadWeatherStations);
+
     });
     
     console.log('page downloaded');
