@@ -23,7 +23,7 @@ get '/keystone' do
 end
 
 get '/winterpark' do
-  set :destination, "Winterpark"
+  set :destination, "Winter Park"
   erb :mapquest
 end
 
