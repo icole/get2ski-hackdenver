@@ -1,1 +1,1 @@
-web: bundle exec thing start -p $PORT
+web: bundle exec ruby server.rb -p $PORT
