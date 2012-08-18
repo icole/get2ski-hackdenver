@@ -210,7 +210,7 @@
 		var fullContactAPI = "https://api.fullcontact.com/v2/address/locationEnrichment.json";
 		var fcApiKey = "4c15158dd13e774d";
 		var resortName = "";
-		document.title = "Vail Map";
+		//document.title = "Vail Map";
 		console.log(document.title.split(" ")[0]);
 		var titleStrings = document.title.split(" ");
 		resortName = titleStrings[0];
